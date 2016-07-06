@@ -1,55 +1,34 @@
 puts 'Hello, thanks for playing High/Low!'
-puts 'The rules of the game are simple.'
-puts 'The computer will randomly pick a number between 1 and 10.'
-puts 'All you have to do is guess that number.'
-puts 'You get three guesses.'
-puts 'The computer will provide some feedback after each guess.'
-puts "Let's play!"
+puts 'You have three guess to find the number between 1 and 10.'
 
-secret_num = rand(1..10)
-
-puts 'Pick your first number.'
-print '> '
-
-user_input = gets.chomp.to_i
-puts "You chose #{user_input}!"
-
-if user_input == secret_num
-  puts "You got it right! Congrats!"
-  exit
-elsif user_input < secret_num
-  puts 'Higher...'
-else
-  puts 'Lower...'
+def check_guess(guess, number, guess_count)
+  if guess == number
+    puts "You got it right! Congrats!"
+    exit
+  elsif guess_count == 3
+    puts "Aw, shucks. The number was #{number}!"
+    puts 'Better luck next time!'
+  elsif guess < number
+    puts 'Higher...'
+  else
+    puts 'Lower...'
+  end
 end
 
-puts 'Pick your second number.'
-print '> '
+def play_high_low
+  guess_count = 0
+  secret_num = rand(1..10)
 
-user_input = gets.chomp.to_i
-puts "You chose #{user_input}!"
+  puts 'Pick a number...'
 
-if user_input == secret_num
-  puts "You got it right! Congrats!"
-  exit
-elsif user_input < secret_num
-  puts 'Higher...'
-else
-  puts 'Lower...'
+  while guess_count < 3
+    guess_count += 1
+
+    guess = gets.chomp.to_i
+    puts "You chose #{guess}!"
+
+    check_guess(guess, secret_num, guess_count)
+  end
 end
 
-puts 'Pick your final number.'
-print '> '
-
-user_input = gets.chomp.to_i
-puts "You chose #{user_input}!"
-
-if user_input == secret_num
-  puts "You got it right! Congrats!"
-  exit
-else
-  puts "Aw, shucks! The number was #{secret_num}"
-  puts "Better luck next time!"
-end
-
-
+play_high_low
